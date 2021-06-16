@@ -301,7 +301,7 @@ const updatePrivacy = async (req, res, next) => {
     if (req.user.isAdmin != 1) {
       throw createError.Forbidden("error permisssion admin");
     }
-    const filter = { urlpost: req.body.urlpost };
+    const filter = { link: req.body.urlpost };
     const findPriv = await posts.findOne(filter);
     let priv;
     if (findPriv.status) {
