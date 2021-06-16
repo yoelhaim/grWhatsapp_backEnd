@@ -4,8 +4,8 @@ const Posts = mongoose.Schema({
   link: String,
   desc: String,
   views: { type: Number, required: true, default: 0 },
-  desc: { type: String, required: true, default: "no " },
-  datecreate: {
+  desc: { type: String, required: true },
+  createAt: {
     type: Date,
     required: true,
     default: Date.now,
@@ -16,8 +16,9 @@ const Posts = mongoose.Schema({
     default: false,
   },
   catagory: String,
-  urlpost: String,
-  imagepost: String,
+  ip: String,
+  country: String,
+  img: String,
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
