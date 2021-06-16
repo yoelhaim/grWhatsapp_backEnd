@@ -45,9 +45,10 @@ const addPost = async (req, res, next) => {
           throw createError.Forbidden("error type image");
         }
       }
+      let llink = req.body.link.replace("https://chat.whatsapp.com/", "");
       const add = await new posts({
         title: req.body.title,
-        link: req.body.link,
+        link: llink,
         desc: req.body.desc,
         catagory: req.body.cat,
         img: thumbnail,
