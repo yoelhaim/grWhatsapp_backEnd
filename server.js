@@ -69,13 +69,6 @@ io.on("connection", (socket) => {
       username_u: data.username_u,
       dateCreate: data.dateCreate,
     });
-
-    // io.emit("recev", {
-    //   msgchat: data.msgchat,
-    //   userId: data.id,
-    //   user: { username_u: data.username },
-    //   createdAt: data.time,
-    // });
   });
   socket.on("joinGroup", (data) => {
     socket.join(data);
@@ -91,8 +84,8 @@ io.on("connection", (socket) => {
 });
 io.attach(server);
 // protected routes
-app.post("/comments/add", protectRoute);
-app.post("/posts/add", protectRoute);
+// app.post("/comments/add", protectRoute);
+// app.post("/posts/add", protectRoute);
 app.put("/posts/update", protectRoute);
 app.put("/users/update", protectRoute);
 app.put("/posts/privacy", protectRoute);
