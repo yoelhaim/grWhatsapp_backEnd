@@ -5,9 +5,6 @@ const fs = require("fs");
 const date = new Date();
 const addPost = async (req, res, next) => {
   try {
-    if (req.body.userId != req.user._id) {
-      throw createError.Forbidden("error permission");
-    }
     function makeid(length) {
       var result = [];
       var characters =
@@ -25,27 +22,16 @@ const addPost = async (req, res, next) => {
       console.log("feled uploaded data");
       res.json({
         code: 404,
-        message: "error  create post  lin already published",
+        message: "error  create groupe   already published",
       });
     } else {
       let link;
       if (!req.files) {
-        link = "you";
         thumbnail = "img";
       } else {
-        link = req.files.link;
         thumbnail = req.files.thumbnail;
-        linksh = makeid(11);
-
-        let fileType = link.mimetype.split("/").pop();
         let thumbnailtype = thumbnail.mimetype.split("/").pop();
-        if (fileType == "mp4" || fileType == "m4a" || fileType == "jpeg") {
-          linkext = linksh + `.${fileType}`;
-          req.files.link.mv("./videos/" + linkext);
-        } else {
-          throw createError.Forbidden("error type videos");
-        }
-        // thumbnail
+        linksh = makeid(11);
         if (
           thumbnailtype == "png" ||
           thumbnailtype == "jpg" ||
@@ -56,25 +42,20 @@ const addPost = async (req, res, next) => {
           thumbnail = linksh + `.${thumbnailtype}`;
           req.files.thumbnail.mv("./thumbnail/" + thumbnail);
         } else {
-          throw createError.Forbidden("error type videos");
+          throw createError.Forbidden("error type image");
         }
       }
       const add = await new posts({
         title: req.body.title,
-        link: linkext,
-        desc: req.body.desk,
-        views: "0",
-        catagory: "film",
-        urlpost: linksh,
-        imagepost: thumbnail,
+        link: req.body.link,
+        desc: req.body.desc,
+        catagory: req.body.cat,
+        img: thumbnail,
+        ip: "123.333.333.928",
+        country: req.body.country,
         userId: req.body.userId,
       }).save();
-      const filter = { _id: req.body.userId };
-      const checkrowviews = await users.findOne(filter);
-      const update = { allvideos: checkrowviews.allvideos + 1 };
-      let doc = await users.findOneAndUpdate(filter, update, {
-        returnOriginal: false,
-      });
+
       res.json({
         code: 200,
         message: "Successufully add  posts ",
@@ -228,7 +209,7 @@ const getByuser = async (req, res, next) => {
 };
 const FindOnePost = async (req, res, next) => {
   try {
-    const filter = { urlpost: req.params.id, status: true };
+    const filter = { link: req.params.id, status: true };
     const findOnePost = await posts.aggregate([
       { $match: filter },
       { $limit: 1 },

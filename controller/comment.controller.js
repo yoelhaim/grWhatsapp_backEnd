@@ -4,15 +4,15 @@ const date = require("../config/date");
 
 const addComments = async (req, res, next) => {
   try {
-    if (req.body.userId != req.user._id) {
-      throw createError.Forbidden("error permission");
-    }
+    // if (req.body.userId != req.user._id) {
+    //   throw createError.Forbidden("error permission");
+    // }
     if (req.body.text == "" || req.body.userId == "") {
       throw createError.Forbidden("error is emty text");
     }
     const post = await new commentsModel({
       text: req.body.text,
-      userId: req.user._id,
+      userId: req.body.userId,
       postId: req.body.postId,
       username_u: req.body.username_u,
       type: true,
