@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.888ecfe438b0c5ab1834efdbabb32790.js"
+  "/precache-manifest.040c2176398583648dc7c2edc480a78d.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "arabest"});
