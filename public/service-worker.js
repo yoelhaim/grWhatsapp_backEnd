@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.040c2176398583648dc7c2edc480a78d.js"
+  "/precache-manifest.3366ea7a877a27c14e702bc054017749.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "arabest"});
+workbox.core.setCacheNameDetails({prefix: "gbWhatsapp"});
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
